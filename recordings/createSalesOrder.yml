@@ -1,0 +1,69 @@
+name: "Create Sales Order"
+description: "Create Sales Order and test customer name"
+start:
+  profile: BUSINESS MANAGER
+steps:
+  - type: navigate
+    target:
+      - page: Sales Order List
+    description: Navigate to Sales Orders
+  - type: page-shown
+    source:
+      page: Sales Order List
+    modal: false
+    runtimeId: bc3
+    description: Page <caption>Sales Orders</caption> was shown.
+  - type: invoke
+    target:
+      - page: Sales Order List
+        runtimeRef: bc3
+      - action: Control_New
+    invokeType: New
+    description: Invoke New on <caption>New</caption>
+  - type: page-shown
+    source:
+      page: Sales Order
+    modal: false
+    runtimeId: blx
+    description: Page <caption>New - Sales Order</caption> was shown.
+  - type: focus
+    target:
+      - page: Sales Order
+        runtimeRef: blx
+      - field: Sell-to Customer Name
+    description: Focus <caption>Customer Name</caption>
+  - type: invoke
+    target:
+      - page: Sales Order
+        runtimeRef: blx
+      - field: Sell-to Customer Name
+    invokeType: Lookup
+    description: Invoke Lookup on <caption>Customer Name</caption>
+  - type: page-shown
+    source:
+      page: Customer Lookup
+    modal: true
+    runtimeId: b16e
+    description: Page <caption>Customers</caption> was shown.
+  - type: invoke
+    target:
+      - page: Customer Lookup
+        runtimeRef: b16e
+      - repeater: Group
+    parameters:
+      AlwaysCommit: false
+    description: Invoke row on <caption>Group</caption>
+  - type: page-closed
+    source:
+      page: Customer Lookup
+    runtimeId: b16e
+    description: Page <caption>Customers</caption> was closed.
+  - type: validate
+    target:
+      - page: Sales Order
+        runtimeRef: blx
+      - field: Sell-to Customer Name
+    operation: =
+    value: Adatum Corporation
+    description: Validate <caption>Customer Name</caption> <operation>is</operation>
+      <value>Adatum Corporation</value>
