@@ -3,6 +3,9 @@
   "appFolders": [
     "PageScriptingTest"
   ],
+  "pageScriptingTests": [
+    "recordings/createSalesOrder.yml"
+  ],
   "testFolders": [],
   "bcptTestFolders": []
 }
