@@ -14,6 +14,8 @@ Note that when using the preview version of AL-Go for GitHub, we recommend you U
 - Issue 1330 CompilerFolder doesn't transfer installed Apps to NuGet resolution
 - Issue 1268 Do not throw an un-understandable error during nuGet download
 - Performance test sample code in 25.4 contains objects with ID 149201 and 149202, which are not renumbered
+- Issue 798 Publish To Environment breaks CI/CD pipelines
+- Issue 1182 Runs-on setting type is ambiguous - string or array
 
 ### New Workflow specific settings
 
@@ -34,6 +36,14 @@ Note that when using the preview version of AL-Go for GitHub, we recommend you U
 
 > [!NOTE]
 > The projects mentioned here are AL-Go projects in a multi-project repository. A repository can contain multiple projects and a project can contain multiple apps.
+
+### Run "Update AL-Go System Files" on multiple branches
+
+_Update AL-Go System Files_ has a new input to specify a list of branches to be updated in a single workflow run.
+When running the workflow on a schedule, you can now also specify `includeBranches` in `workflowSchedule` setting, which allows you to update the specified branches. Read more at https://aka.ms/algosettings#workflowSchedule.
+
+> [!NOTE]
+> When running "Update AL-Go System Files" on multiple branches, the template repository URL will be determined based on the branch the workflow runs on and it will be used for all of the specified branches.
 
 ### Support for incremental builds
 
